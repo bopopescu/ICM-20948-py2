@@ -6,17 +6,22 @@ __author__     = "ChISL"
 __copyright__  = "TBD"
 __credits__    = ["TDK Invensense"]
 __license__    = "TBD"
-__version__    = "0.1"
+__version__    = "Version 0.1"
 __maintainer__ = "https://chisl.io"
 __email__      = "info@chisl.io"
 __status__     = "Test"
+
+#
+#   THIS FILE IS AUTOMATICALLY CREATED
+#    D O     N O T     M O D I F Y  !
+#
 
 from ICM_20948_constants import *
 
 # name:        ICM-20948
 # description: Low power 9-axis MotionTracking device that is ideally suited for Smartphones, Tablets, Wearable Sensors, and IoT applications.
 # manuf:       TDK Invensense
-# version:     0.1
+# version:     Version 0.1
 # url:         https://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf
 # date:        2017-10-18
 
@@ -51,31 +56,14 @@ class ICM_20948_Base:
 		return self.read(REG.USER_CTRL, 8)
 	
 	# Bits DMP_EN
-	# 1 - Enables DMP features.
-	#           0 - DMP features are disabled after the current processing round has completed. 
-	
 	# Bits FIFO_EN
-	# 1 - Enable FIFO operation mode.
-	#           0 - Disable FIFO access from serial interface.
-	#           To disable FIFO writes by DMA, use FIFO_EN register. To disable possible FIFO writes
+	# To disable FIFO writes by DMA, use FIFO_EN register. To disable possible FIFO writes
 	#           from DMP, disable the DMP. 
 	
 	# Bits I2C_MST_EN
-	# 1 - Enable the I2C Master I/F module; pins ES_DA and ES_SCL are isolated from pins
-	#           SDA/SDI and SCL/ SCLK.
-	#           0 - Disable I2C Master I/F module; pins ES_DA and ES_SCL are logically driven by pins
-	#           SDA/SDI and SCL/ SCLK. 
-	
 	# Bits I2C_IF_DIS
-	# 1 - Reset I2C Slave module and put the serial interface in SPI mode only. 
 	# Bits DMP_RST
-	# 1 - Reset DMP module. Reset is asynchronous. This bit auto clears after one clock
-	#           cycle of the internal 20 MHz clock. 
-	
 	# Bits SRAM_RST
-	# 1 - Reset SRAM module. Reset is asynchronous. This bit auto clears after one clock
-	#           cycle of the internal 20 MHz clock. 
-	
 	# Bits I2C_MST_RST
 	# 1 - Reset I2C Master module. Reset is asynchronous. This bit auto clears after one
 	#           clock cycle of the internal 20 MHz clock.
