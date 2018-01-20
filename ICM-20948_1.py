@@ -6,17 +6,22 @@ __author__     = "ChISL"
 __copyright__  = "TBD"
 __credits__    = ["TDK Invensense"]
 __license__    = "TBD"
-__version__    = "0.1"
+__version__    = "Version 0.1"
 __maintainer__ = "https://chisl.io"
 __email__      = "info@chisl.io"
 __status__     = "Test"
+
+#
+#   THIS FILE IS AUTOMATICALLY CREATED
+#    D O     N O T     M O D I F Y  !
+#
 
 from ICM_20948_constants import *
 
 # name:        ICM-20948
 # description: Low power 9-axis MotionTracking device that is ideally suited for Smartphones, Tablets, Wearable Sensors, and IoT applications.
 # manuf:       TDK Invensense
-# version:     0.1
+# version:     Version 0.1
 # url:         https://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf
 # date:        2017-10-18
 
@@ -206,7 +211,7 @@ class ICM_20948_Base:
 	# Bits TBC_PLL
 	# System PLL clock period error (signed, [-10%, +10%]). 
 	# Register REG_BANK_SEL
-	# type , bank 1 
+	# type -, bank 1 
 	
 	def setREG_BANK_SEL(self, val):
 		"""Set register REG_BANK_SEL"""
@@ -218,10 +223,5 @@ class ICM_20948_Base:
 	
 	# Bits reserved_0
 	# Bits USER_BANK
-	# Use the following values in this bit-field to select a USER BANK.
-	#           0: Select USER BANK 0.
-	#           1: Select USER BANK 1.
-	#           2: Select USER BANK 2.
-	#           3: Select USER BANK 3. 
-	
+	# Use the values in this bit-field to select a USER BANK. 
 	# Bits reserved_1
