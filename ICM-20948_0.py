@@ -179,7 +179,7 @@ class ICM_20948_Base:
 	# 1 - INT1 pin is configured as open drain.
 	#           0 - INT1 pin is configured as push-pull. 
 	
-	# Bits INT1_LATCH__EN
+	# Bits INT1_LATCH_EN
 	# 1 - INT1 pin level held until interrupt status is cleared.
 	#           0 - INT1 pin indicates interrupt pulse is width 50 µs. 
 	
