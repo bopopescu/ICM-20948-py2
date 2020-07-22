@@ -56,18 +56,18 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_MST_CTRL, 8)
 	
 	# Bits MULT_MST_EN
-	# Enables multi-master capability. When disabled, clocking to the I2C_MST_IF can be
+	# Enables multi-main capability. When disabled, clocking to the I2C_MST_IF can be
 	#           disabled when not in use and the logic to detect lost arbitration is disabled. 
 	
 	# Bits reserved_0
 	# Bits I2C_MST_P_NSR
-	# This bit controls the I2C Master’s transition from one slave read to the next slave
+	# This bit controls the I2C Main’s transition from one subordinate read to the next subordinate
 	#           read.
 	#           0 - There is a restart between reads.
 	#           1 - There is a stop between reads. 
 	
 	# Bits I2C_MST_CLK
-	# Sets I2C master clock frequency as shown in Table 23. 
+	# Sets I2C main clock frequency as shown in Table 23. 
 	# Register I2C_MST_DELAY_CTRL
 	# type USR3, bank 3 
 	
@@ -83,23 +83,23 @@ class ICM_20948_Base:
 	# Delays shadowing of external sensor data until all data is received. 
 	# Bits reserved_0
 	# Bits I2C_SLV4_DELAY_EN
-	# When enabled, slave 4 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
+	# When enabled, subordinate 4 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
 	#           determined by I2C_MST_ODR_CONFIG. 
 	
 	# Bits I2C_SLV3_DELAY_EN
-	# When enabled, slave 3 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
+	# When enabled, subordinate 3 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
 	#           determined by I2C_MST_ODR_CONFIG. 
 	
 	# Bits I2C_SLV2_DELAY_EN
-	# When enabled, slave 2 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
+	# When enabled, subordinate 2 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
 	#           determined by I2C_MST_ODR_CONFIG. 
 	
 	# Bits I2C_SLV1_DELAY_EN
-	# When enabled, slave 1 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
+	# When enabled, subordinate 1 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
 	#           determined by I2C_MST_ODR_CONFIG. 
 	
 	# Bits I2C_SLV0_DELAY_EN
-	# When enabled, slave 0 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
+	# When enabled, subordinate 0 will only be accessed 1/(1+I2C_SLC4_DLY) samples as
 	#           determined by I2C_MST_ODR_CONFIG. 
 	
 	# Register I2C_SLV0_ADDR
@@ -118,7 +118,7 @@ class ICM_20948_Base:
 	#           0 - Transfer is a write. 
 	
 	# Bits I2C_ID_0
-	# Physical address of I2C slave 0. 
+	# Physical address of I2C subordinate 0. 
 	# Register I2C_SLV0_REG
 	# type USR3, bank 3 
 	
@@ -131,7 +131,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV0_REG, 8)
 	
 	# Bits I2C_SLV0_REG
-	# I2C slave 0 register address from where to begin data transfer. 
+	# I2C subordinate 0 register address from where to begin data transfer. 
 	# Register I2C_SLV0_CTRL
 	# type USR3, bank 3 
 	
@@ -144,9 +144,9 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV0_CTRL, 8)
 	
 	# Bits I2C_SLV0_EN
-	# 1 - Enable reading data from this slave at the sample rate and storing data at the first
-	#           available EXT_SENS_DATA register, which is always EXT_SENS_DATA_00 for I2C slave 0.
-	#           0 - Function is disabled for this slave. 
+	# 1 - Enable reading data from this subordinate at the sample rate and storing data at the first
+	#           available EXT_SENS_DATA register, which is always EXT_SENS_DATA_00 for I2C subordinate 0.
+	#           0 - Function is disabled for this subordinate. 
 	
 	# Bits I2C_SLV0_BYTE_SW
 	# 1 - Swap bytes when reading both the low and high byte of a word. Note there is
@@ -166,15 +166,15 @@ class ICM_20948_Base:
 	
 	# Bits I2C_SLV0_GRP
 	# External sensor data typically comes in as groups of two bytes. This bit is used to
-	#           determine if the groups are from the slave’s register address 0 and 1, 2 and 3, etc.., or if
+	#           determine if the groups are from the subordinate’s register address 0 and 1, 2 and 3, etc.., or if
 	#           the groups are address 1 and 2, 3 and 4, etc.
-	#           0 indicates slave register addresses 0 and 1 are grouped together (odd numbered
-	#           register ends the group). 1 indicates slave register addresses 1 and 2 are grouped
+	#           0 indicates subordinate register addresses 0 and 1 are grouped together (odd numbered
+	#           register ends the group). 1 indicates subordinate register addresses 1 and 2 are grouped
 	#           together (even numbered register ends the group). This allows byte swapping of
 	#           registers that are grouped starting at any address. 
 	
 	# Bits I2C_SLV0_LENG
-	# Number of bytes to be read from I2C slave 0. 
+	# Number of bytes to be read from I2C subordinate 0. 
 	# Register I2C_SLV0_DO
 	# type USR3, bank 3 
 	
@@ -187,7 +187,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV0_DO, 8)
 	
 	# Bits I2C_SLV0_DO
-	# Data out when slave 0 is set to write. 
+	# Data out when subordinate 0 is set to write. 
 	# Register I2C_SLV1_ADDR
 	# type USR3, bank 3 
 	
@@ -204,7 +204,7 @@ class ICM_20948_Base:
 	#           0 - Transfer is a write. 
 	
 	# Bits I2C_ID_1
-	# Physical address of I2C slave 1. 
+	# Physical address of I2C subordinate 1. 
 	# Register I2C_SLV1_REG
 	# type USR3, bank 3 
 	
@@ -217,7 +217,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV1_REG, 8)
 	
 	# Bits I2C_SLV1_REG
-	# I2C slave 1 register address from where to begin data transfer. 
+	# I2C subordinate 1 register address from where to begin data transfer. 
 	# Register I2C_SLV1_CTRL
 	# type USR3, bank 3 
 	
@@ -230,19 +230,19 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV1_CTRL, 8)
 	
 	# Bits I2C_SLV1_EN
-	# 1 - Enable reading data from this slave at the sample rate and storing data at the first
+	# 1 - Enable reading data from this subordinate at the sample rate and storing data at the first
 	#           available EXT_SENS_DATA register as determined by I2C_SLV0_EN and
 	#           I2C_SLV0_LENG.
-	#           0 - Function is disabled for this slave. 
+	#           0 - Function is disabled for this subordinate. 
 	
 	# Bits I2C_SLV1_BYTE_SW
 	# 1 - Swap bytes when reading both the low and high byte of a word. Note there is
 	#           nothing to swap after reading the first byte if I2C_SLV1_REG[0] = 1, or if the last byte
 	#           read has a register address lsb = 0.
 	#           For example, if I2C_SLV0_EN = 0x1, and I2C_SLV0_LENG = 0x3 (to show swap has to
-	#           do with I2C slave address not EXT_SENS_DATA address), and if I2C_SLV1_REG = 0x1,
+	#           do with I2C subordinate address not EXT_SENS_DATA address), and if I2C_SLV1_REG = 0x1,
 	#           and I2C_SLV1_LENG = 0x4:
-	#           1) The first byte read from address 0x1 will be stored at EXT_SENS_DATA_03 (slave
+	#           1) The first byte read from address 0x1 will be stored at EXT_SENS_DATA_03 (subordinate
 	#           0’s data will be in EXT_SENS_DATA_00, EXT_SENS_DATA_01, and
 	#           EXT_SENS_DATA_02),
 	#           2) the second and third bytes will be read and swapped, so the data read from
@@ -257,15 +257,15 @@ class ICM_20948_Base:
 	
 	# Bits I2C_SLV1_GRP
 	# External sensor data typically comes in as groups of two bytes. This bit is used to
-	#           determine if the groups are from the slave’s register address 0 and 1, 2 and 3, etc..,
+	#           determine if the groups are from the subordinate’s register address 0 and 1, 2 and 3, etc..,
 	#           or if the groups are address 1 and 2, 3 and 4, etc.
-	#           0 indicates slave register addresses 0 and 1 are grouped together (odd numbered
-	#           register ends the group). 1 indicates slave register addresses 1 and 2 are grouped
+	#           0 indicates subordinate register addresses 0 and 1 are grouped together (odd numbered
+	#           register ends the group). 1 indicates subordinate register addresses 1 and 2 are grouped
 	#           together (even numbered register ends the group). This allows byte swapping of
 	#           registers that are grouped starting at any address. 
 	
 	# Bits I2C_SLV1_LENG
-	# Number of bytes to be read from I2C slave 1. 
+	# Number of bytes to be read from I2C subordinate 1. 
 	# Register I2C_SLV1_DO
 	# type USR3, bank 3 
 	
@@ -278,7 +278,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV1_DO, 8)
 	
 	# Bits I2C_SLV1_DO
-	# Data out when slave 1 is set to write. 
+	# Data out when subordinate 1 is set to write. 
 	# Register I2C_SLV2_ADDR
 	# type USR3, bank 3 
 	
@@ -295,7 +295,7 @@ class ICM_20948_Base:
 	#           0 - Transfer is a write. 
 	
 	# Bits I2C_ID_2
-	# Physical address of I2C slave 2. 
+	# Physical address of I2C subordinate 2. 
 	# Register I2C_SLV2_REG
 	# type USR3, bank 3 
 	
@@ -308,7 +308,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV2_REG, 8)
 	
 	# Bits I2C_SLV2_REG
-	# I2C slave 2 register address from where to begin data transfer. 
+	# I2C subordinate 2 register address from where to begin data transfer. 
 	# Register I2C_SLV2_CTRL
 	# type USR3, bank 3 
 	
@@ -321,10 +321,10 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV2_CTRL, 8)
 	
 	# Bits I2C_SLV2_EN
-	# 1 - Enable reading data from this slave at the sample rate and storing data at the first
+	# 1 - Enable reading data from this subordinate at the sample rate and storing data at the first
 	#           available EXT_SENS_DATA register as determined by I2C_SLV0_EN, I2C_SLV0_LENG,
 	#           I2C_SLV1_EN and I2C_SLV1_LENG.
-	#           0 - Function is disabled for this slave. 
+	#           0 - Function is disabled for this subordinate. 
 	
 	# Bits I2C_SLV2_BYTE_SW
 	# 1 - Swap bytes when reading both the low and high byte of a word. Note there is
@@ -339,15 +339,15 @@ class ICM_20948_Base:
 	
 	# Bits I2C_SLV2_GRP
 	# External sensor data typically comes in as groups of two bytes. This bit is used to
-	#           determine if the groups are from the slave’s register address 0 and 1, 2 and 3, etc..,
+	#           determine if the groups are from the subordinate’s register address 0 and 1, 2 and 3, etc..,
 	#           or if the groups are address 1 and 2, 3 and 4, etc.
-	#           0 indicates slave register addresses 0 and 1 are grouped together (odd numbered
-	#           register ends the group). 1 indicates slave register addresses 1 and 2 are grouped
+	#           0 indicates subordinate register addresses 0 and 1 are grouped together (odd numbered
+	#           register ends the group). 1 indicates subordinate register addresses 1 and 2 are grouped
 	#           together (even numbered register ends the group). This allows byte swapping of
 	#           registers that are grouped starting at any address. 
 	
 	# Bits I2C_SLV2_LENG
-	# Number of bytes to be read from I2C slave 2. 
+	# Number of bytes to be read from I2C subordinate 2. 
 	# Register I2C_SLV2_DO
 	# type USR3, bank 3 
 	
@@ -360,7 +360,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV2_DO, 8)
 	
 	# Bits I2C_SLV2_DO
-	# Data out when slave 2 is set to write. 
+	# Data out when subordinate 2 is set to write. 
 	# Register I2C_SLV3_ADDR
 	# type USR3, bank 3 
 	
@@ -377,7 +377,7 @@ class ICM_20948_Base:
 	#           0 - Transfer is a write. 
 	
 	# Bits I2C_ID_3
-	# Physical address of I2C slave 3. 
+	# Physical address of I2C subordinate 3. 
 	# Register I2C_SLV3_REG
 	# type USR3, bank 3 
 	
@@ -390,7 +390,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV3_REG, 8)
 	
 	# Bits I2C_SLV3_REG
-	# I2C slave 3 register address from where to begin data transfer. 
+	# I2C subordinate 3 register address from where to begin data transfer. 
 	# Register I2C_SLV3_CTRL
 	# type USR3, bank 3 
 	
@@ -403,10 +403,10 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV3_CTRL, 8)
 	
 	# Bits I2C_SLV3_EN
-	# 1 - Enable reading data from this slave at the sample rate and storing data at the first
+	# 1 - Enable reading data from this subordinate at the sample rate and storing data at the first
 	#           available EXT_SENS_DATA register as determined by I2C_SLV0_EN, I2C_SLV0_LENG,
 	#           I2C_SLV1_EN, I2C_SLV1_LENG, I2C_SLV2_EN and I2C_SLV2_LENG.
-	#           0 - Function is disabled for this slave. 
+	#           0 - Function is disabled for this subordinate. 
 	
 	# Bits I2C_SLV3_BYTE_SW
 	# 1 - Swap bytes when reading both the low and high byte of a word.  Note there is
@@ -421,15 +421,15 @@ class ICM_20948_Base:
 	
 	# Bits I2C_SLV3_GRP
 	# External sensor data typically comes in as groups of two bytes. This bit is used to
-	#           determine if the groups are from the slave’s register address 0 and 1, 2 and 3, etc..,
+	#           determine if the groups are from the subordinate’s register address 0 and 1, 2 and 3, etc..,
 	#           or if the groups are address 1 and 2, 3 and 4, etc.
-	#           0 indicates slave register addresses 0 and 1 are grouped together (odd numbered
-	#           register ends the group). 1 indicates slave register addresses 1 and 2 are grouped
+	#           0 indicates subordinate register addresses 0 and 1 are grouped together (odd numbered
+	#           register ends the group). 1 indicates subordinate register addresses 1 and 2 are grouped
 	#           together (even numbered register ends the group). This allows byte swapping of
 	#           registers that are grouped starting at any address. 
 	
 	# Bits I2C_SLV3_LENG
-	# Number of bytes to be read from I2C slave 3. 
+	# Number of bytes to be read from I2C subordinate 3. 
 	# Register I2C_SLV3_DO
 	# type USR3, bank 3 
 	
@@ -442,10 +442,10 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV3_DO, 8)
 	
 	# Bits I2C_SLV3_DO
-	# Data out when slave 3 is set to write. 
+	# Data out when subordinate 3 is set to write. 
 	# Register I2C_SLV4_ADDR
 	# type USR3, bank 3 
-	# The I2C Slave 4 interface can be used to perform only single byte read and write transactions. 
+	# The I2C Subordinate 4 interface can be used to perform only single byte read and write transactions. 
 	
 	
 	def setI2C_SLV4_ADDR(self, val):
@@ -461,7 +461,7 @@ class ICM_20948_Base:
 	#           0 - Transfer is a write. 
 	
 	# Bits I2C_ID_4
-	# Physical address of I2C slave 4. 
+	# Physical address of I2C subordinate 4. 
 	# Register I2C_SLV4_REG
 	# type USR3, bank 3 
 	
@@ -474,7 +474,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV4_REG, 8)
 	
 	# Bits I2C_SLV4_REG
-	# I2C slave 4 register address from where to begin data transfer. 
+	# I2C subordinate 4 register address from where to begin data transfer. 
 	# Register I2C_SLV4_CTRL
 	# type USR3, bank 3 
 	
@@ -487,22 +487,22 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV4_CTRL, 8)
 	
 	# Bits I2C_SLV4_EN
-	# 1 - Enable data transfer with this slave at the sample rate. If read command, store
+	# 1 - Enable data transfer with this subordinate at the sample rate. If read command, store
 	#           data in I2C_SLV4_DI register, if write command, write data stored in I2C_SLV4_DO
 	#           register. Bit is cleared when a single transfer is complete. Be sure to write
 	#           I2C_SLV4_DO first.
-	#           0 - Function is disabled for this slave. 
+	#           0 - Function is disabled for this subordinate. 
 	
 	# Bits I2C_SLV4_INT_EN
-	# 1 - Enables the completion of the I2C slave 4 data transfer to cause an interrupt.
-	#           0 - Completion of the I2C slave 4 data transfer will not cause an interrupt. 
+	# 1 - Enables the completion of the I2C subordinate 4 data transfer to cause an interrupt.
+	#           0 - Completion of the I2C subordinate 4 data transfer will not cause an interrupt. 
 	
 	# Bits I2C_SLV4_REG_DIS
 	# When set, the transaction does not write a register value, it will only read data, or
 	#           write data. 
 	
 	# Bits I2C_SLV4_DLY
-	# When enabled via the I2C_MST_DELAY_CTRL, those slaves will only be enabled
+	# When enabled via the I2C_MST_DELAY_CTRL, those subordinates will only be enabled
 	#           every1/(1+I2C_SLV4_DLY) samples as determined by I2C_MST_ODR_CONFIG. 
 	
 	# Register I2C_SLV4_DO
@@ -517,7 +517,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV4_DO, 8)
 	
 	# Bits I2C_SLV4_DO
-	# Data out when slave 4 is set to write. 
+	# Data out when subordinate 4 is set to write. 
 	# Register I2C_SLV4_DI
 	# type USR3, bank 3 
 	
@@ -530,7 +530,7 @@ class ICM_20948_Base:
 		return self.read(REG.I2C_SLV4_DI, 8)
 	
 	# Bits I2C_SLV4_DI
-	# Data read from I2C Slave 4. 
+	# Data read from I2C Subordinate 4. 
 	# Register REG_BANK_SEL
 	# type , bank 3 
 	

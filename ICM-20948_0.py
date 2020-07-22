@@ -65,10 +65,10 @@ class ICM_20948_Base:
 	# Bits DMP_RST
 	# Bits SRAM_RST
 	# Bits I2C_MST_RST
-	# 1 - Reset I2C Master module. Reset is asynchronous. This bit auto clears after one
+	# 1 - Reset I2C Main module. Reset is asynchronous. This bit auto clears after one
 	#           clock cycle of the internal 20 MHz clock.
-	#           NOTE: This bit should only be set when the I2C master has hung. If this bit is set during an active
-	#           I2C master transaction, the I2C slave will hang, which will require the host to reset the slave. 
+	#           NOTE: This bit should only be set when the I2C main has hung. If this bit is set during an active
+	#           I2C main transaction, the I2C subordinate will hang, which will require the host to reset the subordinate. 
 	
 	# Bits reserved_0
 	# Register LP_CONFIG
@@ -84,9 +84,9 @@ class ICM_20948_Base:
 	
 	# Bits reserved_0
 	# Bits I2C_MST_CYCLE
-	# 1 - Operate I2C master in duty cycled mode. ODR is determined by
+	# 1 - Operate I2C main in duty cycled mode. ODR is determined by
 	#           I2C_MST_ODR_CONFIG register.
-	#           0 - Disable I2C master duty cycled mode. 
+	#           0 - Disable I2C main duty cycled mode. 
 	
 	# Bits ACCEL_CYCLE
 	# 1 - Operate ACCEL in duty cycled mode. ODR is determined by ACCEL_SMPLRT_DIV
@@ -201,12 +201,12 @@ class ICM_20948_Base:
 	# Bits FSYNC_INT_MODE_EN
 	# 1 - This enables the FSYNC pin to be used as an interrupt. A transition to the active
 	#           level described by the ACTL_FSYNC bit will cause an interrupt. The status of the
-	#           interrupt is read in the I2C Master Status register PASS_THROUGH bit.
+	#           interrupt is read in the I2C Main Status register PASS_THROUGH bit.
 	#           0 - This disables the FSYNC pin from causing an interrupt. 
 	
 	# Bits BYPASS_EN
 	# When asserted, the I2C_MASTER interface pins (ES_CL and ES_DA) will go into
-	#           ‘bypass mode’ when the I2C master interface is disabled. 
+	#           ‘bypass mode’ when the I2C main interface is disabled. 
 	
 	# Bits reserved_0
 	# Register INT_ENABLE
@@ -239,7 +239,7 @@ class ICM_20948_Base:
 	#           0 - Function is disabled. 
 	
 	# Bits I2C_MST_INT_EN
-	# 1 - Enable I2C master interrupt to propagate to interrupt pin 1.
+	# 1 - Enable I2C main interrupt to propagate to interrupt pin 1.
 	#           0 - Function is disabled. 
 	
 	# Register INT_ENABLE_1
@@ -309,32 +309,32 @@ class ICM_20948_Base:
 	#           status bits in this register. 
 	
 	# Bits I2C_SLV4_DONE
-	# Asserted when I2C slave 4’s transfer is complete, will cause an interrupt if bit
+	# Asserted when I2C subordinate 4’s transfer is complete, will cause an interrupt if bit
 	#           I2C_MST_INT_EN in the INT_ENABLE register is asserted, and if the
 	#           SLV4_DONE_INT_EN bit is asserted in the I2C_SLV4_CTRL register. 
 	
 	# Bits I2C_LOST_ARB
-	# Asserted when I2C slave loses arbitration of the I2C bus, will cause an interrupt if bit
+	# Asserted when I2C subordinate loses arbitration of the I2C bus, will cause an interrupt if bit
 	#           I2C_MST_INT_EN in the INT_ENABLE register is asserted. 
 	
 	# Bits I2C_SLV4_NACK
-	# Asserted when slave 4 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
+	# Asserted when subordinate 4 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
 	#           in the INT_ENABLE register is asserted. 
 	
 	# Bits I2C_SLV3_NACK
-	# Asserted when slave 3 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
+	# Asserted when subordinate 3 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
 	#           in the INT_ENABLE register is asserted. 
 	
 	# Bits I2C_SLV2_NACK
-	# Asserted when slave 2 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
+	# Asserted when subordinate 2 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
 	#           in the INT_ENABLE register is asserted. 
 	
 	# Bits I2C_SLV1_NACK
-	# Asserted when slave 1 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
+	# Asserted when subordinate 1 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
 	#           in the INT_ENABLE register is asserted. 
 	
 	# Bits I2C_SLV0_NACK
-	# Asserted when slave 0 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
+	# Asserted when subordinate 0 receives a NACK, will cause an interrupt if bit I2C_MST_INT_EN
 	#           in the INT_ENABLE register is asserted. 
 	
 	# Register INT_STATUS
@@ -356,7 +356,7 @@ class ICM_20948_Base:
 	# Bits DMP_INT1
 	# 1 - Indicates the DMP has generated INT1 interrupt. 
 	# Bits I2C_MST_INT
-	# 1 - Indicates I2C master has generated an interrupt. 
+	# 1 - Indicates I2C main has generated an interrupt. 
 	# Register INT_STATUS_1
 	# type USR0, bank 0 
 	
@@ -658,7 +658,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_00, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_00
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -674,7 +674,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_01, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_01
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -690,7 +690,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_02, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_02
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -706,7 +706,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_03, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_03
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -722,7 +722,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_04, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_04
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -738,7 +738,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_05, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_05
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -754,7 +754,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_06, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_06
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -770,7 +770,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_07, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_07
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -786,7 +786,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_08, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_08
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -802,7 +802,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_09, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_09
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -818,7 +818,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_10, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_10
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -834,7 +834,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_11, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_11
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -850,7 +850,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_12, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_12
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -866,7 +866,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_13, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_13
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -882,7 +882,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_14, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_14
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -898,7 +898,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_15, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_15
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -914,7 +914,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_16, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_16
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -930,7 +930,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_17, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_17
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -946,7 +946,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_18, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_18
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -962,7 +962,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_19, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_19
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -978,7 +978,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_20, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_20
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -994,7 +994,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_21, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_21
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -1010,7 +1010,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_22, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_22
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
@@ -1026,7 +1026,7 @@ class ICM_20948_Base:
 		return self.read(REG.EXT_SLV_SENS_DATA_23, 8)
 	
 	# Bits EXT_SLV_SENS_DATA_23
-	# Sensor data read from external I2C devices via the I2C master interface. The data
+	# Sensor data read from external I2C devices via the I2C main interface. The data
 	#           stored is controlled by the I2C_SLV(0-4)_ADDR, I2C_SLV(0-4)_REG, and I2C_SLV(0-
 	#           4)_CTRL registers. 
 	
